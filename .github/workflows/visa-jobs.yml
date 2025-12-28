@@ -2,7 +2,7 @@ name: Daily Visa Job Finder
 
 on:
   schedule:
-    - cron: "0 3 * * *"   # Daily 03:00 UTC
+    - cron: "30 5 * * *"   # Daily 05:30 UTC
   workflow_dispatch:
 
 jobs:
@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -27,7 +27,7 @@ jobs:
           python visa_job_finder.py
 
       - name: Upload results
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: visa-jobs
           path: visa_jobs.csv
