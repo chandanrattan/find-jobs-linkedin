@@ -1,0 +1,33 @@
+name: Daily Visa Job Finder
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # Daily 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 pandas
+
+      - name: Run visa job finder
+        run: |
+          python visa_job_finder.py
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: visa-jobs
+          path: visa_jobs.csv
