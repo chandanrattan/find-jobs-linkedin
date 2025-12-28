@@ -16,18 +16,35 @@ log = logging.getLogger("visa-job-finder")
 # ---------------- CONFIG ---------------- #
 
 ROLES = [
-    "DevOps Engineer",
-    "Platform Engineer",
+    "DevOps",
+    "Architect",
+    "Platform",
     "Site Reliability Engineer"
 ]
 
 COUNTRIES = [
+    "United Kingdom",
     "Germany",
+    "France",
+    "Italy",
+    "Spain",
     "Netherlands",
+    "Switzerland",
+    "Sweden",
     "Poland",
+    "Belgium",
+    "Austria",
+    "Denmark",
+    "Finland",
+    "Norway",
     "Ireland",
-    "Sweden"
+    "Portugal",
+    "Czech Republic",
+    "Hungary",
+    "Romania",
+    "Greece"
 ]
+
 
 VISA_KEYWORDS = [
     "visa sponsorship",
