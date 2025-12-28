@@ -1,0 +1,41 @@
+name: Sales Navigator Visa Hiring Scan
+
+on:
+  schedule:
+    - cron: "0 4 * * *"   # Daily at 04:00 UTC
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install selenium pandas
+
+      - name: Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
+      - name: Run Sales Navigator Scan
+        env:
+          LI_EMAIL: ${{ secrets.LI_EMAIL }}
+          LI_PASSWORD: ${{ secrets.LI_PASSWORD }}
+        run: |
+          python salesnav_visa_hiring.py
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: salesnav-results
+          path: salesnav_visa_hiring_companies.csv
